@@ -42,7 +42,7 @@ def training():
 
 def decrypt(enc_text, lfreq):
     g = [] #guesses for plaintext
-    look_up_dict = {}
+    look_up_dict = {"p": {"v": "p"}, "o": {"j": "i"}, "n": {"r": "k"}, "m": {"d":"a"}}
     #look_up_dict = read_look_up_dict_file()
     for key1 in look_up_dict: # enumerate through each possible initial position
         dec_text = ""
@@ -51,23 +51,27 @@ def decrypt(enc_text, lfreq):
         prev = ""
         for i in range(len(enc_text)):
             c = enc_text[i].lower()
+            print(initial_pos)
             dec_text += curr_dict[c]
 
             #rotate rotor
-            initial_pos = initial_pos - 1
+            initial_pos = chr(ord(initial_pos) - 1)
             if initial_pos < "a":
                 initial_pos = "z"
+            if initial_pos not in look_up_dict:
+                break
             curr_dict = look_up_dict[initial_pos]
 
             # check with training text
-            if (prev!=""):
+            '''if (prev!=""):
                 numer = lfreq[prev][c] # number of times letter c appears after letter pev
                 denom = lfreq[prev]['tot'] # number of times letter prev appears
                 if ((numer/denom) <= thresh):
                     dec_text = ""
-                    break
+                    break'''
         if (dec_text != ""):
-            g.add(dec_text)
+            g.append(dec_text)
+        break
     return g
 
 def main():
@@ -85,6 +89,7 @@ def main():
     # 1. frequency analysis
     # and use n-grams
     g = decrypt(enc_text, lfreq)
+    print(g)
     # ch-sqaured???
     # IoC???
 if __name__=="__main__":
