@@ -11,7 +11,7 @@ lfreq = {"a": {"tot": 5373, "a": 43, "r": 688, "b": 145, "n": 741, "l": 667, "h"
 # dictionary storing the rotor mappings:
 # rotor_map = {"A": "B", "C":"D"}
 # reflector_map = {1: -2}
-thresh = 0# Diego said keep this low
+thresh = 0 # Diego said keep this low
 # Notes: 1) Three substitutions  2) Make map for each key i.e full mapping after 3 substitutions
 # a map of maps: {26 letters (outmost key, current position on the line): map of 26 letters (full tracing)}
 # Assumptions: 1) We have the rotor and reflector mappings 2) We DO NOT have the initial position
@@ -55,10 +55,10 @@ def encrypt():
 
     # Index lookup table and encrypt.
     for ch in message:
+        print(initial_pos)
         if not ch.isalpha():
             continue
         ch = ch.lower()
-        print(ch,end="")
         encrypted += lu.LOOKUP[initial_pos][ch]
         initial_pos = chr(ord(initial_pos) - 1)
         if initial_pos < "a":
@@ -84,8 +84,8 @@ def decrypt(enc_text, lfreq):
             initial_pos = chr(ord(initial_pos) - 1)
             if initial_pos < "a":
                 initial_pos = "z"
-            if initial_pos not in look_up_dict:
-                break
+            # if initial_pos not in look_up_dict:
+                # break
             curr_dict = look_up_dict[initial_pos]
             '''
             # check with training text
@@ -107,8 +107,7 @@ def decrypt(enc_text, lfreq):
 
 def main():
 
-    print(encrypt())
-    '''
+    # print(encrypt())
     parser = argparse.ArgumentParser(description='Get the encrypted text.')
     parser.add_argument('encrypted_text', help='an integer for the accumulator')
     args = parser.parse_args()
@@ -126,7 +125,7 @@ def main():
     print(g)
     # ch-sqaured???
     # IoC???
-    '''
+
 
 if __name__=="__main__":
     main()

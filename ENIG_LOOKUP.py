@@ -39,6 +39,7 @@ def table_gen():
             refl_result = ENIG_MAPPINGS.REFL_MAP.get(refl_contact_point)
             refl_result_alphabetic = ALPHA_MAP_REV_MAP.get((refl_result + refl_shift_i) % 26)
             final_sub_letter = ROTOR_REV_MAP.get(refl_result_alphabetic)
+
             if (j != 'z'):
                 print("\t\t'" + j + "':'" + final_sub_letter + "',")
             else:
