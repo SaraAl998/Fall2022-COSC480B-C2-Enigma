@@ -1,4 +1,4 @@
 C2.code-workspace
 .DS_Store
-__pycache__/ENIG_MAPPINGS.cpython-39.pyc
-__pycache__/ENIG_LOOKUP_RESULTS.cpython-39.pyc
+__pycache__
+*.pyc
